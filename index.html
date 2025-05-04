@@ -228,73 +228,17 @@
   </div>
 
   <script>
-    // Mood Check-In Logic
-    const form = document.getElementById('moodForm');
-    const resultDiv = document.getElementById('result');
-
-    const tips = {
-      happy: "Keep up the good vibes! Maybe share your happiness with a friend.",
-      okay: "Take a deep breath and do something you enjoy, even if it's small.",
-      sad: "It’s okay to feel sad. Try journaling or talking to someone you trust.",
-      stressed: "Try a 5-minute meditation or take a short walk to clear your mind."
-    };
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const mood = form.mood.value;
-      const wantsTip = form.tip.value;
-
-      if (!mood || !wantsTip) {
-        resultDiv.textContent = "Please answer both questions.";
-        return;
-      }
-
-      let message = "You're feeling " + mood + ". ";
-      if (wantsTip === "yes") {
-        message += tips[mood];
-      } else {
-        message += "Thanks for checking in!";
-      }
-
-      resultDiv.textContent = message;
-    });
-
-    // Navigation Logic
-    function switchTab(tab) {
-      const tabs = document.querySelectorAll('.tab-content');
-      tabs.forEach(tabContent => {
-        tabContent.classList.remove('active');
-      });
-
-      const buttons = document.querySelectorAll('.nav-tabs button');
-      buttons.forEach(button => {
-        button.classList.remove('active');
-      });
-
-      document.getElementById(tab).classList.add('active');
-      document.querySelector(#${tab}Tab).classList.add('active');
-    }
-
-    // Activity Points Logic
-    function calculatePoints() {
-      const checkboxes = document.querySelectorAll('#activityForm input[type="checkbox"]');
-      let points = 0;
-      checkboxes.forEach(cb => {
-        if (cb.checked) points += 10;
-      });
-      document.getElementById('pointsResult').textContent = "You've earned: " + points + " points today! 🎉";
-    }
-
-    // Chatbot Logic
+    // Chatbot Logic (Local responses without API)
     function sendMessage() {
       const input = document.getElementById('user-input');
       const message = input.value.trim();
       if (message === '') return;
 
       displayMessage(message, 'user');
-      const botReply = getBotReply(message);
-      setTimeout(() => displayMessage(botReply, 'bot'), 500);
       input.value = '';
+
+      const botReply = getBotReply(message);
+      displayMessage(botReply, 'bot');
     }
 
     function displayMessage(message, sender) {
@@ -311,22 +255,59 @@
       if (msg.includes('hi') || msg.includes('hello')) {
         return "Hi there! How can I help you?";
       } else if (msg.includes('sad')) {
-        return "I'm sorry to hear you're sad. Would you like to talk more about it?";
-      } else if (msg.includes('stress') || msg.includes('anxious')) || msg.includes('anxiety')) {
-        return "Try some deep breathing. You're not alone — I'm here.";
+        return "I'm sorry to hear you're feeling sad. Want to talk about it?";
+      } else if (msg.includes('stressed') || msg.includes('anxious')) {
+        return "Take a deep breath. Try some relaxation exercises. I'm here for you.";
       } else if (msg.includes('bye')) {
-        return "Take care! I'm here whenever you want to talk.";
+        return "Take care! Feel free to come back if you need support.";
       } else if (msg.includes('good')) {
-        return "Happy to hear that. Stay healthy and positive!";
+        return "Great to hear that! Keep up the positivity.";
       } else if (msg.includes('sick')) {
-        return "Take care. Hoping for your quick recovery.";
-      } 
-      else if (msg.includes(' not well')) {
-        return "what happened ? tell me.";
-      }else {
-        return "Tell me more. I'm listening.";
+        return "I'm sorry to hear that. Take care and rest well!";
+      } else {
+        return "I'm here to listen. Tell me more!";
       }
     }
+
+    // Switch tabs logic
+    function switchTab(tab) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tabContent => {
+        tabContent.classList.remove('active');
+      });
+
+      const buttons = document.querySelectorAll('.nav-tabs button');
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+
+      document.getElementById(tab).classList.add('active');
+      document.querySelector(`#${tab}Tab`).classList.add('active');
+    }
+
+    // Mood Check-In Logic
+    const form = document.getElementById('moodForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const mood = form.mood.value;
+      const wantsTip = form.tip.value;
+
+      if (!mood || !wantsTip) {
+        resultDiv.textContent = "Please answer both questions.";
+        return;
+      }
+
+      let message = "You're feeling " + mood + ". ";
+      if (wantsTip === "yes") {
+        message += "Here's a tip for you!";
+      } else {
+        message += "Thanks for checking in!";
+      }
+
+      resultDiv.textContent = message;
+    });
   </script>
 </body>
 </html>

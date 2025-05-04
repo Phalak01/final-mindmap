@@ -31,7 +31,6 @@
       color: #3466f2;
     }
 
-    /* Tab Navigation */
     .nav-tabs {
       display: flex;
       justify-content: space-around;
@@ -57,7 +56,6 @@
       border-bottom: 2px solid #3466f2;
     }
 
-    /* Tab Content */
     .tab-content {
       display: none;
     }
@@ -66,7 +64,6 @@
       display: block;
     }
 
-    /* Mood Check-In */
     .question {
       margin-top: 20px;
     }
@@ -106,7 +103,6 @@
       font-weight: bold;
     }
 
-    /* Chatbot Styles */
     .chat-box {
       width: 100%;
       height: 400px;
@@ -171,7 +167,6 @@
       <button id="chatTab" onclick="switchTab('chat')">💬 Chatbot</button>
     </div>
 
-    <!-- MindMate Title and New Heading -->
     <h1>MindMate</h1>
     <h2>Your Mental Wellness Companion</h2>
 
@@ -228,7 +223,7 @@
   </div>
 
   <script>
-    // Chatbot Logic (Local responses without API)
+    // Chatbot Logic
     function sendMessage() {
       const input = document.getElementById('user-input');
       const message = input.value.trim();
@@ -264,12 +259,22 @@
         return "Great to hear that! Keep up the positivity.";
       } else if (msg.includes('sick')) {
         return "I'm sorry to hear that. Take care and rest well!";
-      } else {
+      } 
+       else if (msg.includes('exam')) {
+        return "All the best study well!";
+        }
+         else if (msg.includes('upset')) {
+        return "what happened? Try to share with me";
+        }
+         else if (msg.includes('not well')) {
+        return "Share with me i will help you !";
+         }
+        else { 
         return "I'm here to listen. Tell me more!";
       }
     }
 
-    // Switch tabs logic
+    // Tab Switching
     function switchTab(tab) {
       const tabs = document.querySelectorAll('.tab-content');
       tabs.forEach(tabContent => {
@@ -285,7 +290,7 @@
       document.querySelector(`#${tab}Tab`).classList.add('active');
     }
 
-    // Mood Check-In Logic
+    // Mood Check-In
     const form = document.getElementById('moodForm');
     const resultDiv = document.getElementById('result');
 
@@ -308,6 +313,14 @@
 
       resultDiv.textContent = message;
     });
+
+    // ✅ Activity Points Calculation
+    function calculatePoints() {
+      const checkboxes = document.querySelectorAll('#activityForm input[type="checkbox"]:checked');
+      const points = checkboxes.length * 10;
+      const result = document.getElementById('pointsResult');
+      result.textContent = `You've earned ${points} points today! 🎉`;
+    }
   </script>
 </body>
 </html>

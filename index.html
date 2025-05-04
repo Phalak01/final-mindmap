@@ -312,7 +312,7 @@
         return "Hi there! How can I help you?";
       } else if (msg.includes('sad')) {
         return "I'm sorry to hear you're sad. Would you like to talk more about it?";
-      } else if (msg.includes('stress') || msg.includes('anxious')) {
+      } else if (msg.includes('stress') || msg.includes('anxious')) || msg.includes('anxiety')) {
         return "Try some deep breathing. You're not alone — I'm here.";
       } else if (msg.includes('bye')) {
         return "Take care! I'm here whenever you want to talk.";
@@ -320,7 +320,10 @@
         return "Happy to hear that. Stay healthy and positive!";
       } else if (msg.includes('sick')) {
         return "Take care. Hoping for your quick recovery.";
-      } else {
+      } 
+      else if (msg.includes(' not well')) {
+        return "what happened ? tell me.";
+      }else {
         return "Tell me more. I'm listening.";
       }
     }

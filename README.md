@@ -1,1 +1,5 @@
-An app that tracks your mental health ang gives suggestion
+An app that tracks your mental health and gives you suggestion.
+<br>
+author - phalak
+
+
